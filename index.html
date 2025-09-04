@@ -1,19 +1,162 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
+<html lang="pt-BR"><head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Ligar agora</title>
+  <meta name="description" content="Página simples para iniciar uma ligação telefônica via link tel.">
+  <style>
+    :root {
+      --bg1: #0f172a; /* slate-900 */
+      --bg2: #1e293b; /* slate-800 */
+      --card: #0b1020ee;
+      --text: #e2e8f0; /* slate-200 */
+      --muted: #94a3b8; /* slate-400 */
+      --accent: #38bdf8; /* sky-400 */
+      --accent-2: #22d3ee; /* cyan-400 */
+      --success: #10b981; /* emerald-500 */
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, Noto Sans, "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--text);
+      background: radial-gradient(1000px 600px at 10% 10%, #0b1229 0, transparent 60%),
+                  radial-gradient(1000px 600px at 90% 90%, #0a1a2f 0, transparent 60%),
+                  linear-gradient(135deg, var(--bg1), var(--bg2));
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+
+    .card {
+      width: min(560px, 92vw);
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35), inset 0 0 0 1px rgba(255,255,255,0.04);
+      overflow: hidden;
+      backdrop-filter: blur(6px);
+    }
+
+    .header {
+      padding: 28px 24px 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo {
+      width: 44px; height: 44px;
+      display: grid; place-items: center;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #001321;
+      font-size: 22px;
+      font-weight: 900;
+      box-shadow: 0 6px 16px rgba(34,211,238,0.35);
+    }
+
+    h1 {
+      margin: 0; font-size: 1.4rem; line-height: 1.2;
+    }
+    .subtitle { color: var(--muted); margin-top: 4px; font-size: .95rem; }
+
+    .phone {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 24px; margin: 8px 16px 0; border-radius: 14px;
+      background: rgba(148,163,184,0.08);
+      border: 1px solid rgba(148,163,184,0.18);
+      font-variant-numeric: tabular-nums;
+    }
+    .phone strong { font-size: 1.6rem; letter-spacing: .5px; }
+    .phone small { color: var(--muted); }
+
+    .actions { display: grid; gap: 12px; padding: 20px 24px 28px; }
+
+    .btn {
+      appearance: none; border: 0; cursor: pointer; text-decoration: none;
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 14px 18px; border-radius: 12px; font-weight: 700; font-size: 1.05rem;
+      transition: transform .06s ease, box-shadow .2s ease, background .2s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--success), #34d399);
+      color: #032012;
+      box-shadow: 0 10px 24px rgba(16,185,129,0.28);
+    }
+    .btn-primary:hover { transform: translateY(-1px); }
+
+    .btn-secondary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #001321;
+      box-shadow: 0 10px 24px rgba(56,189,248,0.28);
+    }
+    .btn-secondary:hover { transform: translateY(-1px); }
+
+    .muted {
+      text-align: center; color: var(--muted); font-size: .92rem; padding: 6px 24px 24px;
+    }
+
+    .footnote { color: var(--muted); font-size: .8rem; text-align:center; padding: 0 24px 20px; }
+
+    .copy {
+      display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:10px;
+      border:1px dashed rgba(148,163,184,0.35); background: rgba(148,163,184,0.07);
+      cursor:pointer; font-weight:600; font-size:.95rem; color: var(--text);
+    }
+    .copy:active { transform: scale(0.98); }
+
+    @media (max-width: 420px) {
+      .phone strong { font-size: 1.3rem; }
+      .btn { font-size: 1rem; padding: 12px 14px; }
+    }
+  </style>
 </head>
-<body style="display:flex;align-items:center;justify-content:center;height:100vh;">
-  <a href="tel:+553534234912" style="
-    display:inline-block;
-    padding:15px 25px;
-    background:#28a745;
-    color:white;
-    text-decoration:none;
-    border-radius:10px;
-    font-size:20px;
-    font-weight:bold;
-  ">📞 Ligar agora</a>
-</body>
-</html>
+<body>
+  <main class="card" role="main">
+    <header class="header">
+      <div class="logo" aria-hidden="true">📞</div>
+      <div>
+        <h1>Dra. Ana Paula</h1>
+        
+      </div>
+    </header>
+
+    <section class="phone" aria-label="Número de telefone">
+      <div>
+        <div class="subtitle">Telefone</div>
+        <strong id="number">+55 (35) 3423-4912</strong>
+      </div>
+      <button class="copy" id="copyBtn" type="button" aria-label="Copiar número">
+        <span>Copiar</span>
+      </button>
+    </section>
+
+    <div class="actions">
+      <a class="btn btn-primary" href="tel:+553534234912">Discar agora</a>
+      
+    </div>
+
+    
+    
+  </main>
+
+  <script>
+    const btn = document.getElementById('copyBtn');
+    const num = document.getElementById('number').textContent.replace(/\D+/g, '');
+    btn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText('+55 (35) 3423-4912');
+        const old = btn.innerHTML;
+        btn.innerHTML = 'Copiado!';
+        setTimeout(() => btn.innerHTML = old, 1400);
+      } catch (e) {
+        alert('Copie manualmente: +55 (35) 3423-4912');
+      }
+    });
+  </script>
+
+
+</body></html>
